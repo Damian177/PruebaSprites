@@ -1,4 +1,22 @@
 import pygame
+from variables import *
+
+
+class level():
+    lista_plataformas =None
+    lista_paredes =None
+    def __init__(self, nombre = "uno") -> None:
+        self.nombre  = nombre     
+        self.lista_plataformas = pygame.sprite.Group()
+        self.lista_paredes = pygame.sprite.Group()
+
+class level1(level):
+    def __init__(self):
+        super().__init__()
+        plataformas_lv1= ((15,80,150,5),(100,200,150,5),(168,260,350,5))
+        for i in plataformas_lv1:
+            plataforma=tiles(i[0],i[1],i[2],i[3])
+            self.lista_plataformas.add(plataforma)
 
 #tile, plataforma, contorno, con color o imagen 
 class tiles(pygame.sprite.Sprite):
