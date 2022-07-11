@@ -3,6 +3,8 @@ Hace unos años comencé a estudiar python. Más concretamente empece a trabajar
 Comencé a hacer algunas pruebas con sprites, 
 
 Sprites de 
-NYKNCK (itch.io)
+NYKNCK - (itch.io) http://nyknck.com/
+PixelFrog - https://pixelfrog-assets.itch.io/
+CodeManu - https://codemanu.itch.io/
 
 

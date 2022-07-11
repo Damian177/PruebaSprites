@@ -30,10 +30,10 @@ class Player(pygame.sprite.Sprite):
    
     def update(self):
         self.calc_grav()
-        self.rect.x = self.rect.x + self.vel_x
         self.rect.y = self.rect.y + self.vel_y
 
         tocando_plataforma=pygame.sprite.spritecollide(self, self.plataformas_del_nivel, False)   
+
         for plataforma in tocando_plataforma:
             if self.vel_y > 0:
                 self.rect.bottom = plataforma.rect.top 
@@ -42,6 +42,18 @@ class Player(pygame.sprite.Sprite):
             self.vel_y=0
         
         #print(self.vel_y)
+        self.rect.x = self.rect.x + self.vel_x
+        
+        # Hemos chocado contra la pared después de esta actualización?
+        tocando_plat = pygame.sprite.spritecollide(self, self.plataformas_del_nivel, False)
+        for plataforma in tocando_plat:
+            # Si nos estamos desplazando hacia la derecha, hacemos que nuestro lado derecho sea el lado izquierdo del objeto que hemos tocado.
+            if self.vel_x > 0:
+                self.rect.right = plataforma.rect.left
+            elif self.vel_x < 0:
+                # En caso contrario, si nos desplazamos hacia la izquierda, hacemos lo opuesto.
+                self.rect.left = plataforma.rect.right
+            self.vel_x=0
  
 
         self.img_refresh()
@@ -51,6 +63,8 @@ class Player(pygame.sprite.Sprite):
             self.vel_y = 1
         else:
             self.vel_y += self.vel_g    
+            if self.vel_y > 20:
+                self.vel_y =20
                 
     def accion (self,event):
        # for event in pygame.event.get():
@@ -115,6 +129,11 @@ class Player(pygame.sprite.Sprite):
                 self.i =3
             if self.vel_y>0 and self.i >4:
                 self.i =5
+            if self.i ==8:
+                if self.vel_x < 0 :
+                    self.direction= 'left'
+                else:
+                    self.direction= 'right'
         if self.direction =='spin' :
             if self.i >= len(self.spin):
                 self.i =3
