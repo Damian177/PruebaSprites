@@ -12,6 +12,7 @@ class level():
         self.lista_paredes = pygame.sprite.Group()
         self.lista_manzanas = pygame.sprite.Group()
         self.portal = pygame.sprite.Group()
+        self.paredes= ((0,0,800,5),(0,5,5,600),(5,595,795,5), (795,5,5,595))
 
 class level1(level):
     def __init__(self):
@@ -22,14 +23,13 @@ class level1(level):
         for i in plataformas_lv1:
             plataforma=tiles(i[0],i[1],i[2],i[3])
             self.lista_plataformas.add(plataforma)
-        paredes_lv1= ((0,0,800,5),(0,5,5,600),(5,595,795,5), (795,5,5,595))
-        for i in paredes_lv1:
+        for i in self.paredes:
             pared=tiles(i[0],i[1],i[2],i[3])
             self.lista_plataformas.add(pared)
-        lista_manzanas= ((117, 178),(146, 58),(227, 240),(468, 239),(629, 170))
+        #lista_manzanas= ((117, 178),(146, 58),(227, 240),(468, 239),(629, 170))
+        lista_manzanas= ((130, 70),(156, 187),(210, 246),(473, 250),(629, 170))
         for i in lista_manzanas:
             manzana=Manzana(i)
-            print(i)
             self.lista_manzanas.add(manzana)
         self.portal.add(portal((700,500)))
 class level2(level):
@@ -37,7 +37,7 @@ class level2(level):
         super().__init__()
         self.pos_player=(25,25)
 
-        plataformas_lv1= ((29, 540,150,5),(621, 532,150,5),(262, 426,150,5),(100, 333,150,5),(342, 241,150,5),(514, 182,150,5),(655, 113,150,5))
+        plataformas_lv1= ((29, 540,150,8),(621, 532,150,8),(262, 426,150,5),(100, 333,150,5),(342, 241,150,5),(514, 182,150,5),(655, 113,150,5))
         for i in plataformas_lv1:
             plataforma=tiles(i[0],i[1],i[2],i[3])
             self.lista_plataformas.add(plataforma)
@@ -48,13 +48,12 @@ class level2(level):
         lista_manzanas= ((118, 535),(693, 515),(352, 411),(158, 317),(475, 222))
         for i in lista_manzanas:
             manzana=Manzana(i)
-            print(i)
             self.lista_manzanas.add(manzana)
         self.portal.add(portal((670, 20)))
 class level3(level):
     def __init__(self):
         super().__init__()
-        self.pos_player=(25,350)
+        self.pos_player=(350,25)
 
         plataformas_lv1= ((260, 125,185,5),(5, 210,150,5),(545, 125,170,5),(660, 363,150,5),(132, 429,150,5),(2, 509,150,5))
         for i in plataformas_lv1:
@@ -67,7 +66,6 @@ class level3(level):
         lista_manzanas= ((646, 114),(85, 185),(740, 343),(251, 413),(102, 497))
         for i in lista_manzanas:
             manzana=Manzana(i)
-            print(i)
             self.lista_manzanas.add(manzana)
         self.portal.add(portal((0, 520)))
         
@@ -124,7 +122,7 @@ class Manzana(pygame.sprite.Sprite):
         self.image = self.spriteSheet.subsurface((512,0,32,32))
         self.rect = self.image.get_rect()
         self.i=0
-        self.rect.topleft=pos
+        self.rect.center=pos
     def update(self):
         self.i +=1
         if self.i >16:

@@ -59,7 +59,7 @@ while salir == False:
             if event.key== pygame.K_DOWN:
                 monster.move_dir('spin')                  
             if event.key== pygame.K_r:
-                monster.rect.center=(20,20)
+                monster.rect.center=(nivel.pos_player)
             if event.key== pygame.K_g:
                 level_change=1
 
